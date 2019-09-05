@@ -1,0 +1,38 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    //实例化WebSocket
+    var ws = new WebSocket('ws://127.0.0.1:999');
+    //连接触发
+    ws.onopen = function (evt) {
+        //连接成功 发送数据
+        ws.send('我是前端发送的数据');
+    };
+    //判断错误
+    ws.onerror = function (evt) {
+        console.log('socketError:' + evt);
+    };
+    //接受数据触发
+    ws.onmessage = function (data) {
+        console.log(data);
+    };
+    //关闭连接触发
+    ws.onclose = function () {
+        console.log('连接已关闭');
+    };
+
+    function send() {
+        var msg = document.getElementById('message').value;
+        ws.send(msg);
+    };
+</script>
+<h1>WebSocket Echo Test</h1>
+<form>
+    <p>
+        Message: <input id="message" type="text" value="Hello, Fucker!">
+    </p>
+</form>
+<button onclick="send();">Send Message</button>
+</body>
+</html>
